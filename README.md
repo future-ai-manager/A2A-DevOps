@@ -11,11 +11,11 @@ An experimental repository for an agent-to-agent DevOps system based on ClaudeCo
 
 <table>
   <tr>
-    <td><img src="/img/1-dashboard.png" height="200"></td>
+    <td><img src="/img/1-dashboard.png" height="400"></td>
   </tr>
   <tr>
-    <td><img src="/img/2-a2a-structure.png" height="200"></td>
-    <td><img src="/img/3-decision-making-process.png" height="200"></td>
+    <td><img src="/img/2-a2a-structure.png" height="400"></td>
+    <td><img src="/img/3-decision-making-process.png" height="400"></td>
   </tr>
 </table>
 
