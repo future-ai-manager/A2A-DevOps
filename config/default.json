@@ -1,0 +1,168 @@
+{
+  "version": "1.0.0",
+  "name": "A2A DevOps Platform",
+  "description": "Agent-to-Agent DevOps automation platform",
+  
+  "claudeCode": {
+    "timeout": 30000,
+    "maxRetries": 3,
+    "enableDebug": false
+  },
+  
+  "monitoring": {
+    "prometheusUrl": "http://localhost:9090",
+    "alertmanagerUrl": "http://localhost:9093", 
+    "falcoSocket": "/var/run/falco.sock",
+    "falcoRulesPath": "./config/falco-rules.yaml",
+    "healthCheckInterval": 30000,
+    "metricsRetentionDays": 30
+  },
+  
+  "notifications": {
+    "slack": {
+      "enabled": false,
+      "webhookUrl": "",
+      "channel": "#devops-alerts",
+      "username": "A2A Bot",
+      "iconEmoji": ":robot_face:"
+    },
+    "pagerduty": {
+      "enabled": false,
+      "apiKey": "",
+      "serviceKey": ""
+    },
+    "email": {
+      "enabled": false,
+      "smtpHost": "",
+      "smtpPort": 587,
+      "smtpUser": "",
+      "smtpPassword": "",
+      "from": "noreply@a2a-platform.local",
+      "to": []
+    }
+  },
+  
+  "mcp": {
+    "maxConcurrentServers": 10,
+    "startupTimeout": 30000,
+    "shutdownTimeout": 10000,
+    "healthCheckInterval": 30000,
+    "enableMetrics": true,
+    "metricsPort": 9091,
+    "servers": {
+      "falco": {
+        "enabled": true,
+        "autoStart": true,
+        "port": 3001,
+        "maxMemory": "512MB",
+        "restartPolicy": "always"
+      },
+      "prometheus": {
+        "enabled": true,
+        "autoStart": true, 
+        "port": 3002,
+        "maxMemory": "256MB",
+        "restartPolicy": "always"
+      }
+    }
+  },
+  
+  "web": {
+    "enabled": false,
+    "host": "localhost",
+    "port": 3000,
+    "cors": true,
+    "rateLimit": {
+      "enabled": true,
+      "windowMs": 900000,
+      "max": 100
+    },
+    "compression": true,
+    "helmet": true
+  },
+  
+  "security": {
+    "enableAuditLog": true,
+    "auditLogPath": "./logs/audit.log",
+    "maxAuditLogSize": "100MB",
+    "auditLogRetentionDays": 90,
+    "encryptSensitiveData": true,
+    "allowedOrigins": ["http://localhost:3000"],
+    "sessionTimeout": 3600000
+  },
+  
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "directory": "./logs",
+    "maxSize": "50MB",
+    "maxFiles": 10,
+    "enableConsole": true,
+    "enableFile": true,
+    "enableHttp": false,
+    "httpEndpoint": ""
+  },
+  
+  "cache": {
+    "enabled": true,
+    "type": "memory",
+    "ttl": 300000,
+    "maxSize": "100MB",
+    "directory": "./cache"
+  },
+  
+  "performance": {
+    "queryTimeout": 30000,
+    "maxQueryHistory": 1000,
+    "enableQueryCache": true,
+    "queryCacheTtl": 300000,
+    "maxConcurrentQueries": 10
+  },
+  
+  "agents": {
+    "routing": {
+      "confidenceThreshold": 0.7,
+      "fallbackAgent": "general",
+      "enableOptimization": true,
+      "optimizationInterval": 86400000
+    },
+    "falco": {
+      "defaultTimeRange": "1h",
+      "defaultSeverity": "medium",
+      "maxEvents": 1000,
+      "enableRuleValidation": true
+    },
+    "prometheus": {
+      "defaultTimeRange": "5m",
+      "defaultStep": "15s",
+      "maxDataPoints": 1000,
+      "queryTimeout": 30000
+    }
+  },
+  
+  "features": {
+    "realTimeMonitoring": true,
+    "webUI": true,
+    "apiEndpoints": true,
+    "webhookSupport": true,
+    "slackIntegration": true,
+    "pagerdutyIntegration": true,
+    "emailNotifications": true,
+    "auditLogging": true,
+    "metricsExport": true
+  },
+  
+  "development": {
+    "mockData": false,
+    "enableDebugRoutes": false,
+    "skipHealthChecks": false,
+    "disableAuthentication": false
+  },
+  
+  "limits": {
+    "maxQueryLength": 1000,
+    "maxResponseSize": "10MB",
+    "maxConcurrentConnections": 100,
+    "requestTimeout": 30000
+  }
+}
